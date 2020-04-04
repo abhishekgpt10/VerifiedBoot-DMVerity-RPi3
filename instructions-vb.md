@@ -1,5 +1,7 @@
 # Introduction 
 
+Verified Boot Stage 1: U-boot and Kernel 
+
 The following instructions will help you build U-Boot and OPTEE-OS for Raspberry Pi 3 B+ on a Linux host and enable Verified boot.
 We built this on Ubuntu 18.04.0. 
 
@@ -228,7 +230,7 @@ make EXT_DTB=../../fit/bcm2710-rpi-3-b-pubkey.dtb u-boot rpi3-u-boot-bin
 
 ### Partition the SD card 
 
-Tip: If you’re using a VM, you can mount the SD card as a hard disk.
+Tip: If you’re using a VM, you can mount the SD card as a hard disk.\
 Refer: http://rizwanansari.net/access-sd-card-on-linux-from-windows-using-virtualbox
 
 
@@ -240,12 +242,12 @@ fdisk /dev/sdx   # where sdx is the name of your sd-card
    > p             # create primary
    > 1             # make it the first partition
    > <enter>       # use the default sector
-   > +128M         # create a boot partition with 32MB of space
+   > +220M         # create a boot partition with 32MB of space
    > n             # create rootfs partition
    > p
    > 2
    > <enter>
-   > <enter>       # fill the remaining disk, adjust size to fit your needs
+   > 2G            # Create 2GB partition
    > t             # change partition type
    > 1             # select first partition
    > e             # use type 'e' (FAT16)
