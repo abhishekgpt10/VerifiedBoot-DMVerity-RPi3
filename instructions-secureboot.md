@@ -1,6 +1,6 @@
 # Introduction 
 
-Verified Boot Stage 1: U-boot and Kernel 
+### Verified Boot Stage 1: U-boot and Kernel 
 
 The following instructions will help you build U-Boot and OPTEE-OS for Raspberry Pi 3 B+ on a Linux host and enable Verified boot.
 We built this on Ubuntu 18.04.0. 
@@ -208,7 +208,7 @@ With all the above changes, we need to clean and build u-boot and its tools agai
 cd ../u-boot
 make mrproper
 cd ../build
-make EXT_DTB=../../fit/bcm2710-rpi-3-b-pubkey.dtb rpi3-u-boot-bin
+make EXT_DTB=../../fit/bcm2710-rpi-3-b-pubkey.dtb u-boot rpi3-u-boot-bin
 ```
 
 ### Create and sign the FIT image 

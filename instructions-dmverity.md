@@ -1,6 +1,6 @@
 # Introduction 
 
-Verified Boot Stage 2: Dm-Verity
+### Verified Boot Stage 2: Dm-Verity
 
 Device-Mapper’s “verity” target provides transparent integrity checking of block devices using a cryptographic digest provided by the kernel crypto API.\
 Device-mapper is infrastructure in the Linux kernel that provides a generic way to create virtual layers of block devices.\
@@ -73,6 +73,7 @@ make u-boot-clean rpi3-u-boot-bin-clean rpi3-head-bin-clean
 make u-boot rpi3-u-boot-bin
 
 cd ../../fit
+rm image.fit
 ../rpi-optee/u-boot/tools/mkimage -f image.its image.fit
 ```
 
@@ -199,10 +200,11 @@ cd ../build
 make linux
 
 cd ../../fit
+rm image.fit
 ../rpi-optee/u-boot/tools/mkimage -f image.its image.fit
 ```
 
-## Part 3 - Build signed u-boot and fitImage
+## Part 4 - Build signed u-boot and fitImage, TEST....
 
 Clean u-boot and add CONFIG_OF_CONTROL in `rpi-optee/u-boot/configs/rpi_3_defconfig` which we commented at starting.
 
@@ -210,7 +212,11 @@ Clean u-boot and add CONFIG_OF_CONTROL in `rpi-optee/u-boot/configs/rpi_3_defcon
 CONFIG_OF_CONTROL=y
 ``` 
 
+Delete signed dtb, copy unsigned dtb and sign dtb and image.fit
+
 ```
+rm bcm2710-rpi-3-b-pubkey.dtb
+cp ../rpi-optee/linux/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b.dtb bcm2710-rpi-3-b-pubkey.dtb
 ../rpi-optee/u-boot/tools/mkimage -F -k keys/ -K bcm2710-rpi-3-b-pubkey.dtb -r image.fit
 
 make u-boot-clean rpi3-u-boot-bin-clean rpi3-head-bin-clean
@@ -218,7 +224,7 @@ make EXT_DTB=../../fit/bcm2710-rpi-3-b-pubkey.dtb u-boot rpi3-u-boot-bin
 ```
 
 Mount the sdcard boot partition and replace `image.fit` and `u-boot-rpi.bin`. `u-boot-rpi.bin` will be found in u-boot folder.\
-Boot the system.\
+Boot the system.
 
 2-Stage Verified Boot for RPi3 is completed. Below is the boot log.
 
