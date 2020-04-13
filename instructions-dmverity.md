@@ -103,7 +103,7 @@ fdisk /dev/sdx   # where sdx is the name of your sd-card
 Put the sdcard in RPi3 and boot, it will boot in initramfs. Run the below command for preparing hash device.
 
 ```
-veritysetup create vnroot /dev/mmcblk0p2 /dev/mmcblk0p3
+veritysetup format vnroot /dev/mmcblk0p2 /dev/mmcblk0p3
 ```
 
 It will print output like
